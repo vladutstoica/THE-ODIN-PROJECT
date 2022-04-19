@@ -7,7 +7,6 @@ const playerScore = document.getElementById("playerScore");
 const gameStatus = document.getElementById("gameStatus");
 
 let computerSelection = null;
-let playerSelection = null;
 
 playerOptions.forEach(option => {
   option.addEventListener("click", () => {
@@ -40,16 +39,16 @@ function computerPlay() {
 function playRound(playerSelection) {
   computerPlay();
 
-  if (playerSelection == "rock" && computerSelection == "rock") gameStatus.textContent = "TIE";
-  else if (playerSelection == "rock" && computerSelection == "scissors") playerScore.textContent = parseInt(playerScore.textContent) + 1;
-  else if (playerSelection == "rock" && computerSelection == "paper") computerScore.textContent = parseInt(computerScore.textContent) + 1;
+  if (playerSelection === "rock" && computerSelection === "rock") gameStatus.textContent = "TIE";
+  else if (playerSelection === "rock" && computerSelection === "scissors") playerScore.textContent = (parseInt(playerScore.textContent) + 1).toString();
+  else if (playerSelection === "rock" && computerSelection === "paper") computerScore.textContent = (parseInt(computerScore.textContent) + 1).toString();
 
-  if (playerSelection == "paper" && computerSelection == "paper") gameStatus.textContent = "TIE";
-  else if (playerSelection == "paper" && computerSelection == "rock") playerScore.textContent = parseInt(playerScore.textContent) + 1;
-  else if (playerSelection == "paper" && computerSelection == "scissors") computerScore.textContent = parseInt(computerScore.textContent) + 1;
+  if (playerSelection === "paper" && computerSelection === "paper") gameStatus.textContent = "TIE";
+  else if (playerSelection === "paper" && computerSelection === "rock") playerScore.textContent = (parseInt(playerScore.textContent) + 1).toString();
+  else if (playerSelection === "paper" && computerSelection === "scissors") computerScore.textContent = (parseInt(computerScore.textContent) + 1).toString();
 
-  if (playerSelection == "scissors" && computerSelection == "scissors") gameStatus.textContent = "TIE";
-  else if (playerSelection == "scissors" && computerSelection == "paper") playerScore.textContent = parseInt(playerScore.textContent) + 1;
-  else if (playerSelection == "scissors" && computerSelection == "rock") computerScore.textContent = parseInt(computerScore.textContent) + 1;
+  if (playerSelection === "scissors" && computerSelection === "scissors") gameStatus.textContent = "TIE";
+  else if (playerSelection === "scissors" && computerSelection === "paper") playerScore.textContent = (parseInt(playerScore.textContent) + 1).toString();
+  else if (playerSelection === "scissors" && computerSelection === "rock") computerScore.textContent = (parseInt(computerScore.textContent) + 1).toString();
 }
 
