@@ -21,7 +21,7 @@ playerOptions.forEach(option => {
   })
 });
 
-function resetGame() {
+window.resetGame = function resetGame() {
   computerScore.textContent = "0";
   playerScore.textContent = "0";
 }
