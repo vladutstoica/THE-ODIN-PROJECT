@@ -6,15 +6,26 @@ const blackButton = document.getElementById("blackButton");
 const rgbButton = document.getElementById("rgbButton");
 
 let gridSize = gridRange.value;
-const CONTAINER_SIZE = 500;
+let containerSize = 500;
 
 let blackSelected = null;
 
+window.addEventListener("resize", () => {
+  checkWindowSize();
+  generateBlocks(gridRange.value);
+})
+
 gridRange.addEventListener("change", () => {
+  checkWindowSize();
   generateBlocks(gridRange.value);
 
   gridRangeLabel.textContent = gridRange.value;
 });
+
+function checkWindowSize() {
+  if (window.innerWidth > 500) containerSize = 500;
+  else containerSize = window.innerWidth - 20;
+}
 
 function generateBlocks(gridSize) {
   removeBlocks();
@@ -38,8 +49,8 @@ function generateBlocks(gridSize) {
 function setGridSize(gridSize) {
   gridSize = gridRange.value;
 
-  sketchContainer.style.gridTemplateColumns = `repeat(${gridSize}, ${CONTAINER_SIZE / gridSize}px)`;
-  sketchContainer.style.gridTemplateRows = `repeat(${gridSize}, ${CONTAINER_SIZE / gridSize}px)`;
+  sketchContainer.style.gridTemplateColumns = `repeat(${gridSize}, ${containerSize / gridSize}px)`;
+  sketchContainer.style.gridTemplateRows = `repeat(${gridSize}, ${containerSize / gridSize}px)`;
 }
 
 function removeBlocks() {
@@ -76,6 +87,7 @@ window.resetSketch = function resetSketch() {
 
 // Invoke function itself
 (function () {
+  checkWindowSize();
   generateBlocks(gridSize);
   blackSketch();
 })();
