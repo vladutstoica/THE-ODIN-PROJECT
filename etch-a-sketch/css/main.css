@@ -287,6 +287,17 @@ button {
   cursor: pointer;
 }
 
+.button {
+  flex: 50%;
+}
+
+.button--is-selected {
+  background: #000;
+  color: #fff;
+
+  border: 1px solid #000;
+}
+
 .sketch__wrapper {
   position: relative;
 }
@@ -311,19 +322,19 @@ button {
   width: 100%;
 }
 
-.grid-range {
+.sketch__input-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.sketch__grid-range {
   width: 100%;
 }
 
-.button {
-  flex: 50%;
-}
-
-.button--is-selected {
-  background: #000;
-  color: #fff;
-
-  border: 1px solid #000;
+.sketch__grid-range-label {
+  line-height: 0;
 }
 
 .sketch__container {
