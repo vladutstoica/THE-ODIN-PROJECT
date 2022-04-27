@@ -6,11 +6,11 @@
   <title></title>
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  
-  <meta property="og:title" content="" />
-  <meta property="og:type" content="" />
-  <meta property="og:url" content="" />
-  <meta property="og:image" content="" />
+
+  <meta property="og:title" content=""/>
+  <meta property="og:type" content=""/>
+  <meta property="og:url" content=""/>
+  <meta property="og:image" content=""/>
 
   <link rel="manifest" href="site.webmanifest">
   <link rel="apple-touch-icon" href="icon.png">
@@ -24,18 +24,48 @@
 
 <body>
 
-  <!-- Add your site or application content here -->
-  <p>Hello world! This is HTML5 Boilerplate.</p>
-  <script src="js/vendor/modernizr-3.11.2.min.js"></script>
-  <script src="js/plugins.js"></script>
-  <script src="js/main.js"></script>
+<div class="calculator">
+  <span id="calculatorOutput" class="calculator__output">0</span>
+  <div class="calculator__input">
+    <button id="cleanInput" class="calculator__input-value calculator__input-value--helpers">AC</button>
+    <button id="positiveNegativeInput" class="calculator__input-value calculator__input-value--helpers">+/-</button>
+    <button class="calculator__input-value calculator__input-value--helpers">%</button>
+    <button class="calculator__input-value calculator__input-value--operator">/</button>
+    <button class="calculator__input-value calculator__input-value--number">7</button>
+    <button class="calculator__input-value calculator__input-value--number">8</button>
+    <button class="calculator__input-value calculator__input-value--number">9</button>
+    <button class="calculator__input-value calculator__input-value--operator">x</button>
+    <button class="calculator__input-value calculator__input-value--number">4</button>
+    <button class="calculator__input-value calculator__input-value--number">5</button>
+    <button class="calculator__input-value calculator__input-value--number">6</button>
+    <button class="calculator__input-value calculator__input-value--operator">-</button>
+    <button class="calculator__input-value calculator__input-value--number">1</button>
+    <button class="calculator__input-value calculator__input-value--number">2</button>
+    <button class="calculator__input-value calculator__input-value--number">3</button>
+    <button class="calculator__input-value calculator__input-value--operator">+</button>
+    <button class="calculator__input-value calculator__input-value--long">0</button>
+    <button class="calculator__input-value">.</button>
+    <button id="equalInput" class="calculator__input-value calculator__input-value--operator">=</button>
+  </div>
+</div>
 
-  <!-- Google Analytics: change UA-XXXXX-Y to be your site's ID. -->
-  <script>
-    window.ga = function () { ga.q.push(arguments) }; ga.q = []; ga.l = +new Date;
-    ga('create', 'UA-XXXXX-Y', 'auto'); ga('set', 'anonymizeIp', true); ga('set','transport','beacon'); ga('send', 'pageview')
-  </script>
-  <script src="https://www.google-analytics.com/analytics.js" async></script>
+<script src="js/vendor/modernizr-3.11.2.min.js"></script>
+<script src="js/plugins.js"></script>
+<script src="js/main.js"></script>
+
+<!-- Google Analytics: change UA-XXXXX-Y to be your site's ID. -->
+<script>
+  window.ga = function () {
+    ga.q.push(arguments)
+  };
+  ga.q = [];
+  ga.l = +new Date;
+  ga('create', 'UA-XXXXX-Y', 'auto');
+  ga('set', 'anonymizeIp', true);
+  ga('set', 'transport', 'beacon');
+  ga('send', 'pageview')
+</script>
+<script src="https://www.google-analytics.com/analytics.js" async></script>
 </body>
 
 </html>
