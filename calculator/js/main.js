@@ -26,7 +26,9 @@ positiveNegativeInput.addEventListener("click", () => {
 })
 
 equalInput.addEventListener("click", () => {
-  operate(lastOperator, bucket, calculatorOutput.textContent);
+  operate(lastOperator, parseInt(bucket), parseInt(calculatorOutput.textContent));
+
+  operatorInputPressed = false;
 })
 
 numberInputs.forEach(numberInput => {
@@ -37,6 +39,8 @@ numberInputs.forEach(numberInput => {
 
 operatorInputs.forEach(operatorInput => {
   operatorInput.addEventListener("click", () => {
+
+    if (operatorInputPressed) operate(lastOperator, parseInt(bucket), parseInt(calculatorOutput.textContent));
     bucket = calculatorOutput.textContent;
     operatorInputPressed = true;
     lastOperator = operatorInput.textContent;
@@ -47,19 +51,21 @@ function writeToOutput(data) {
   if (operatorInputPressed || cleanInput.textContent === "AC") calculatorOutput.textContent = "";
 
   calculatorOutput.textContent += data;
+  console.log(data);
 
   cleanInput.textContent = "C";
 
-  operatorInputPressed = false;
+  // operatorInputPressed = false;
 }
 
 function operate(operator, n1, n2) {
-  console.log(operator, n1, n2);
+  console.log(n1, operator, n2);
+
+  calculatorOutput.textContent = "";
 
   switch (operator) {
     case "/":
-      let test = divide(n1, n2);
-      writeToOutput(test);
+      divide(n1, n2);
       break;
     case "x":
       multiply(n1, n2);
@@ -76,17 +82,29 @@ function operate(operator, n1, n2) {
 }
 
 function add(n1, n2) {
-  return n1 + n2;
+  let result = n1 + n2;
+
+  writeToOutput(result);
+  return result;
 }
 
 function subtract(n1, n2) {
-  return n1 - n2;
+  let result = n1 - n2;
+
+  writeToOutput(result);
+  return result;
 }
 
 function multiply(n1, n2) {
-  return n1 * n2;
+  let result = n1 * n2;
+
+  writeToOutput(result);
+  return result;
 }
 
 function divide(n1, n2) {
-  return n1 / n2;
+  let result = n1 / n2;
+
+  writeToOutput(result);
+  return result;
 }
