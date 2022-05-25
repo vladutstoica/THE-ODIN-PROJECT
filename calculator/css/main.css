@@ -347,7 +347,7 @@ button {
   background: #ffc36f;
 }
 
-.calculator__input-value--operator:active {
+.calculator__input-value--operator:focus {
   background: #ffffff;
   color: #fc9301;
 }
