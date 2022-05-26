@@ -1,11 +1,8 @@
-const calculatorOutput = document.getElementById("calculatorOutput");
-const cleanInput = document.getElementById("cleanInput");
-const positiveNegativeInput = document.getElementById("positiveNegativeInput");
-const equalInput = document.getElementById("equalInput");
-
+const calcOutput = document.querySelectorAll("[data-output]");
 const numberInputs = document.querySelectorAll("[data-number]");
 const operatorInputs = document.querySelectorAll("[data-operator]");
 const helpersInputs = document.querySelectorAll("[data-helper]");
+const equalInput = document.querySelectorAll("[data-equal]");
 
 let state = {
   first: {
@@ -32,27 +29,36 @@ operatorInputs.forEach(operator => {
 
 helpersInputs.forEach(helper => {
   helper.addEventListener("click", () => {
-    if (state.first.helper) return;
     updateStateHelpers(helper.textContent);
     console.log("Helper pressed ", helper.textContent);
   })
 });
 
-equalInput.addEventListener("click", () => {
-  console.log(state);
-});
+equalInput.forEach(equal => {
+  equal.addEventListener("click", () => {
+    // if (!state.first.valid || !state.second.valid) return;
+
+    calculateState();
+
+    console.log(state);
+  });
+})
 
 function updateStateArgs(value) {
   if (!state.operator) {
+    if (state.first.param === "0") state.first.param = "";
     if (!state.first.helper) {
       state.first.param += value;
 
       state.first.valid = true;
     } else if (!state.first.param.includes(state.first.helper)) {
       state.first.param += state.first.helper;
+      state.first.helper = "";
+
       state.first.valid = false;
     } else {
       state.first.param += value;
+      state.first.helper = "";
 
       state.first.valid = true;
     }
@@ -61,164 +67,164 @@ function updateStateArgs(value) {
       state.first.param = state.first.param + value;
       state.first.valid = true
     }
+
+    writeToOutput(state.first.param);
   } else {
+    if (state.second.param === "0") state.second.param = "";
+
     if (!state.second.helper) {
       state.second.valid = true;
       state.second.param += value;
     } else if (!state.second.param.includes(state.second.helper)) {
       state.second.param += state.second.helper;
+      state.second.helper = "";
+
       state.second.valid = false;
+
     } else {
       state.second.param += value;
+      state.second.helper = "";
+
       state.second.valid = true;
     }
     if (!state.second.valid) {
       state.second.param = state.second.param + value;
       state.second.valid = true
     }
+
+    writeToOutput(state.second.param);
   }
 }
 
 function updateStateOperator(value) {
   if (state.first.param && state.first.valid) state.operator = value;
   state.first.helper = "";
+  state.second.helper = "";
 }
 
 function updateStateHelpers(value) {
   state.second?.param ? state.second.helper = value : state.first.helper = value;
+
+  switch (value) {
+    case ".":
+      if (state.first.helper) return;
+      console.log(". status");
+      break;
+    case "+/-":
+      if (state.first.helper) {
+        if (state.first.param > 0) {
+          state.first.param = "-" + state.first.param;
+
+          writeToOutput(state.first.param);
+        } else {
+          state.first.param = state.first.param.replace("-", "");
+
+          writeToOutput(state.first.param);
+
+        }
+
+        state.first.helper = "";
+      } else {
+        if (state.second.param > 0) {
+          state.second.param = "-" + state.second.param;
+
+          writeToOutput(state.second.param);
+
+        } else {
+          state.second.param = state.second.param.replace("-", "");
+
+          writeToOutput(state.second.param);
+
+        }
+
+        state.second.helper = "";
+      }
+
+      break;
+
+    case "AC":
+      if (state.second.param) {
+        state.second.param = "0";
+
+        writeToOutput(state.second.param);
+      } else {
+        state.first.param = "0";
+        state.operator = "";
+
+        writeToOutput(state.first.param);
+
+      }
+
+      state.first.helper = "";
+      state.second.helper = "";
+
+      console.log("AC status");
+      break;
+  }
 }
 
+function calculateState() {
+  switch (state.operator) {
+    case "%":
+      remainder(parseInt(state.first.param), parseInt(state.second.param));
 
+      console.log(parseInt(state.first.param) % parseInt(state.second.param));
+      break;
+    case "/":
+      divide(parseInt(state.first.param), parseInt(state.second.param));
 
+      console.log(parseInt(state.first.param) / parseInt(state.second.param));
+      break;
+    case "x":
+      multiply(parseInt(state.first.param), parseInt(state.second.param));
 
+      console.log(parseInt(state.first.param) * parseInt(state.second.param));
+      break;
+    case "-":
+      subtract(parseInt(state.first.param), parseInt(state.second.param));
 
+      console.log(parseInt(state.first.param) - parseInt(state.second.param));
+      break;
+    case "+":
+      add(parseInt(state.first.param), parseInt(state.second.param));
 
+      console.log(parseInt(state.first.param) + parseInt(state.second.param));
+      break;
+  }
+}
 
+function add(n1, n2) {
+  let result = n1 + n2;
 
+  writeToOutput(result);
+}
 
+function subtract(n1, n2) {
+  let result = n1 - n2;
 
+  writeToOutput(result);
+}
 
+function multiply(n1, n2) {
+  let result = n1 * n2;
 
+  writeToOutput(result);
+}
 
+function divide(n1, n2) {
+  let result = n1 / n2;
 
+  writeToOutput(result);
+}
 
+function remainder(n1, n2) {
+  let result = n1 % n2;
 
+  writeToOutput(result);
+}
 
-
-
-
-
-
-
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// let bucket;
-// let operatorInputPressed = false;
-// let lastOperator;
-// let state = {};
-// calculatorOutput.addEventListener("change", () => {
-// })
-//
-// cleanInput.addEventListener("click", () => {
-//
-//   if (cleanInput.textContent === "C") {
-//     calculatorOutput.textContent = "0";
-//     lastOperator.focus();
-//     cleanInput.textContent = "AC";
-//   } else {
-//     calculatorOutput.textContent = "0";
-//     bucket = "0";
-//   }
-// })
-//
-// positiveNegativeInput.addEventListener("click", () => {
-//   if (parseInt(calculatorOutput.textContent) > 0) calculatorOutput.textContent = "-" + calculatorOutput.textContent;
-//   else calculatorOutput.textContent = calculatorOutput.textContent.slice(1);
-// })
-//
-// equalInput.addEventListener("click", () => {
-//   operate(lastOperator, parseInt(bucket), parseInt(calculatorOutput.textContent));
-//
-//   state = {};
-//   operatorInputPressed = false;
-// })
-//
-// numberInputs.forEach(numberInput => {
-//   numberInput.addEventListener("click", () => {
-//     writeToOutput(numberInput.textContent);
-//     if (state?.operator) {
-//       state.secondValue = numberInput.textContent;
-//       console.log(state.secondValue);
-//     }
-//   })
-// })
-//
-// operatorInputs.forEach(operatorInput => {
-//   operatorInput.addEventListener("click", () => {
-//     state.operator = operatorInput.textContent;
-//     if (operatorInputPressed) operate(lastOperator, parseInt(bucket), parseInt(calculatorOutput.textContent));
-//     bucket = calculatorOutput.textContent;
-//     operatorInputPressed = true;
-//     lastOperator = operatorInput.textContent;
-//   })
-// })
-//
-// function writeToOutput(data) {
-//   if (operatorInputPressed || cleanInput.textContent === "AC") calculatorOutput.textContent = "";
-//
-//   calculatorOutput.textContent += data;
-//   console.log(data);
-//
-//   cleanInput.textContent = "C";
-// }
-//
-// function operate(operator, n1, n2) {
-//   console.log(n1, operator, n2);
-//
-//   calculatorOutput.textContent = "";
-//
-//   switch (operator) {
-//     case "/":
-//       divide(n1, n2);
-//       break;
-//     case "x":
-//       multiply(n1, n2);
-//       break;
-//     case "-":
-//       subtract(n1, n2);
-//       break;
-//     case "+":
-//       add(n1, n2);
-//       break;
-//     default:
-//       console.log("Congratulations! You managed to break the code");
-//   }
-// }
-//
-// function add(n1, n2) {
-//   let result = n1 + n2;
-//
-//   writeToOutput(result);
-// }
-//
-// function subtract(n1, n2) {
-//   let result = n1 - n2;
-//
-//   writeToOutput(result);
-// }
-//
-// function multiply(n1, n2) {
-//   let result = n1 * n2;
-//
-//   writeToOutput(result);
-// }
-//
-// function divide(n1, n2) {
-//   let result = n1 / n2;
-//
-//   writeToOutput(result);
-// }
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+function writeToOutput(value) {
+  calcOutput.forEach(display => {
+    display.textContent = value;
+  })
+}
