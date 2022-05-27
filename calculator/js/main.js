@@ -10,7 +10,7 @@ let state = {
   },
   second: {
     param: "",
-  }
+  },
 };
 
 numberInputs.forEach(number => {
@@ -36,8 +36,6 @@ helpersInputs.forEach(helper => {
 
 equalInput.forEach(equal => {
   equal.addEventListener("click", () => {
-    // if (!state.first.valid || !state.second.valid) return;
-
     calculateState();
 
     console.log(state);
