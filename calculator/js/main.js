@@ -7,12 +7,9 @@ const equalInput = document.querySelectorAll("[data-equal]");
 let state = {
   first: {
     param: "", helper: "", isValid: false,
-  },
-  operator: "",
-  second: {
+  }, operator: "", second: {
     param: "", helper: "", isValid: false,
-  },
-  result: "",
+  }, result: "",
 };
 
 numberInputs.forEach(number => {
@@ -142,7 +139,8 @@ function dotCase(value) {
 
   if (state.first.param.includes(".")) {
     state.first.helper = "";
-  } else if (state.second.param.includes(".")) {
+  }
+  if (state.second.param.includes(".")) {
     state.second.helper = "";
   }
 
