@@ -45,11 +45,13 @@ function updateParam(value) {
     state.result = "";
   }
   if (state.operator) {
-    if (state.second.param === "0") state.second.param = ""
+    if (state.second.param.length > 8) return;
+    if (state.second.param === "0") state.second.param = "";
     state.second.param += state.second.helper + value;
 
     writeToOutput(state.second.param);
   } else {
+    if (state.first.param.length > 8) return;
     if (state.first.param === "0") state.first.param = ""
     state.first.param += state.first.helper + value;
 
