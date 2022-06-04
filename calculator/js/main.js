@@ -9,7 +9,7 @@ let state = {
     param: "", helper: "", isValid: false,
   }, operator: "", second: {
     param: "", helper: "", isValid: false,
-  }, result: "",
+  }, result: "", cleanFormula: true,
 };
 
 numberInputs.forEach(number => {
@@ -62,7 +62,7 @@ function updateParam(value) {
 }
 
 function updateOperator(value) {
-  if (state.result) state.first.param = state.result
+  if (state.result && state.cleanFormula) state.first.param = state.result
 
   state.operator = value;
 }
@@ -87,6 +87,7 @@ function ACCase(value) {
     state.operator = ""
     state.second.param = "0";
     state.result = "";
+    state.cleanFormula = true;
 
     // TODO Make AC change to C
     value.textContent = "AC";
@@ -102,17 +103,17 @@ function ACCase(value) {
 }
 
 function PosNegCase() {
-  console.log(state.first, state.second);
-
   if (state.operator && state.result && state.first.param > 0) {
     state.first.param = "-" + state.first.param;
+    state.cleanFormula = false;
+
     writeToOutput(state.first.param);
-    console.log("posnegfMID", state);
     return;
   } else if (state.operator && state.result && state.first.param < 0) {
     state.first.param = state.first.param.replace("-", "");
+    state.cleanFormula = false;
+
     writeToOutput(state.first.param);
-    console.log("posnegMID", state);
     return;
   }
 
@@ -131,7 +132,6 @@ function PosNegCase() {
     state.first.param = state.first.param.replace("-", "");
     writeToOutput(state.first.param);
   }
-  console.log(state.first, state.second);
 }
 
 function dotCase(value) {
