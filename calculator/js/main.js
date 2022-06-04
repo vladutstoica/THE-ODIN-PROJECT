@@ -12,6 +12,7 @@ let state = {
   second: {
     param: "", helper: "", isValid: false,
   },
+  ACStatus: "AC",
   result: "",
 };
 
@@ -32,7 +33,7 @@ operatorInputs.forEach(operator => {
 helpersInputs.forEach(helper => {
   helper.addEventListener("click", () => {
     console.log("Helper pressed ", helper.textContent);
-    switchHelpers(helper.textContent);
+    switchHelpers(helper);
   })
 });
 
@@ -75,9 +76,9 @@ function updateOperator(value) {
 }
 
 function switchHelpers(value) {
-  switch (value) {
+  switch (value.textContent) {
     case "AC":
-      ACCase();
+      ACCase(value.textContent);
       console.log(value);
       break;
     case "+/-":
@@ -90,7 +91,16 @@ function switchHelpers(value) {
   }
 }
 
-function ACCase() {
+function ACCase(value) {
+  if (state.second.param === "0") {
+    state.first.param = "0";
+    state.operator = ""
+    state.second.param = "0";
+
+    // TODO Make AC change to C
+    value.textContent = "AC";
+  }
+
   if (state.operator) {
     state.second.param = "0";
     writeToOutput(state.second.param);
@@ -101,7 +111,9 @@ function ACCase() {
 }
 
 function PosNegCase() {
-
+  if (state.operator)
+    if (state.second.param >= 0 )
+      state.second.param = "-" + state.second.param;
 }
 
 function dotCase(value) {
