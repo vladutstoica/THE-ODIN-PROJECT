@@ -79,14 +79,12 @@ function switchHelpers(value) {
   switch (value.textContent) {
     case "AC":
       ACCase(value.textContent);
-      console.log(value);
       break;
     case "+/-":
       PosNegCase();
-      console.log(value);
       break;
     case ".":
-      dotCase(value);
+      dotCase(value.textContent);
       break;
   }
 }
@@ -111,9 +109,21 @@ function ACCase(value) {
 }
 
 function PosNegCase() {
-  if (state.operator)
-    if (state.second.param >= 0 )
-      state.second.param = "-" + state.second.param;
+  if (state.operator && state.second.param >= 0) {
+    state.second.param = "-" + state.second.param;
+    writeToOutput(state.second.param);
+  } else if (state.operator && state.second.param < 0) {
+    state.second.param = state.second.param.replace("-", "");
+    writeToOutput(state.second.param);
+  }
+
+  if (!state.operator && state.first.param >= 0) {
+    state.first.param = "-" + state.first.param;
+    writeToOutput(state.first.param);
+  } else if (!state.operator && state.first.param < 0) {
+    state.first.param = state.first.param.replace("-", "");
+    writeToOutput(state.first.param);
+  }
 }
 
 function dotCase(value) {
