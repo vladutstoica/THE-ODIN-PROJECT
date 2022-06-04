@@ -51,10 +51,12 @@ function updateParam(value) {
     state.result = "";
   }
   if (state.operator) {
+    if (state.second.param === "0") state.second.param = ""
     state.second.param += state.second.helper + value;
 
     writeToOutput(state.second.param);
   } else {
+    if (state.first.param === "0") state.first.param = ""
     state.first.param += state.first.helper + value;
 
     writeToOutput(state.first.param);
@@ -75,15 +77,31 @@ function updateOperator(value) {
 function switchHelpers(value) {
   switch (value) {
     case "AC":
+      ACCase();
       console.log(value);
       break;
     case "+/-":
+      PosNegCase();
       console.log(value);
       break;
     case ".":
       dotCase(value);
       break;
   }
+}
+
+function ACCase() {
+  if (state.operator) {
+    state.second.param = "0";
+    writeToOutput(state.second.param);
+  } else {
+    state.first.param = "0";
+    writeToOutput(state.first.param);
+  }
+}
+
+function PosNegCase() {
+
 }
 
 function dotCase(value) {
