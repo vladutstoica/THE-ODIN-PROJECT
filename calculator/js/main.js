@@ -12,27 +12,23 @@ let state = {
   second: {
     param: "", helper: "", isValid: false,
   },
-  ACStatus: "AC",
   result: "",
 };
 
 numberInputs.forEach(number => {
   number.addEventListener("click", () => {
-    console.log("Number pressed ", number.textContent);
     updateParam(number.textContent);
   })
 });
 
 operatorInputs.forEach(operator => {
   operator.addEventListener("click", () => {
-    console.log("Operator pressed ", operator.textContent);
     updateOperator(operator.textContent);
   })
 });
 
 helpersInputs.forEach(helper => {
   helper.addEventListener("click", () => {
-    console.log("Helper pressed ", helper.textContent);
     switchHelpers(helper);
   })
 });
@@ -65,8 +61,7 @@ function updateParam(value) {
 
   checkValid();
 
-
-  console.log(state.first, state.second);
+  console.log("UpdateParams", state.first, state.second);
 }
 
 function updateOperator(value) {
@@ -94,6 +89,7 @@ function ACCase(value) {
     state.first.param = "0";
     state.operator = ""
     state.second.param = "0";
+    state.result = "";
 
     // TODO Make AC change to C
     value.textContent = "AC";
@@ -109,7 +105,21 @@ function ACCase(value) {
 }
 
 function PosNegCase() {
-  if (state.operator && state.second.param >= 0) {
+  console.log(state.first, state.second);
+
+  if (state.operator && state.result && state.first.param > 0) {
+    state.first.param = "-" + state.first.param;
+    writeToOutput(state.first.param);
+    console.log("posnegfMID", state);
+    return;
+  } else if (state.operator && state.result && state.first.param < 0) {
+    state.first.param = state.first.param.replace("-", "");
+    writeToOutput(state.first.param);
+    console.log("posnegMID", state);
+    return;
+  }
+
+  if (state.operator && state.second.param > 0) {
     state.second.param = "-" + state.second.param;
     writeToOutput(state.second.param);
   } else if (state.operator && state.second.param < 0) {
@@ -117,20 +127,22 @@ function PosNegCase() {
     writeToOutput(state.second.param);
   }
 
-  if (!state.operator && state.first.param >= 0) {
+  if (!state.operator && state.first.param > 0) {
     state.first.param = "-" + state.first.param;
     writeToOutput(state.first.param);
   } else if (!state.operator && state.first.param < 0) {
     state.first.param = state.first.param.replace("-", "");
     writeToOutput(state.first.param);
   }
+  console.log(state.first, state.second);
 }
 
 function dotCase(value) {
   if (state.operator) state.second.helper = value; else state.first.helper = value;
 
-  if (state.first.param.includes(".") || state.second.param.includes(".")) {
+  if (state.first.param.includes(".")) {
     state.first.helper = "";
+  } else if (state.second.param.includes(".")) {
     state.second.helper = "";
   }
 
@@ -215,7 +227,7 @@ function divide(n1, n2) {
 }
 
 function remainder(n1, n2) {
-  state.result = n1 % n2;
+  state.result = (n1 % n2).toString();
 
   writeToOutput(state.result);
 
