@@ -12,6 +12,8 @@ let state = {
   }, result: "", cleanFormula: true,
 };
 
+let ACStatus;
+
 numberInputs.forEach(number => {
   number.addEventListener("click", () => {
     updateParam(number.textContent);
@@ -25,6 +27,7 @@ operatorInputs.forEach(operator => {
 });
 
 helpersInputs.forEach(helper => {
+  if (helper.textContent === "AC") ACStatus = helper;
   helper.addEventListener("click", () => {
     switchHelpers(helper);
   })
@@ -33,12 +36,11 @@ helpersInputs.forEach(helper => {
 equalInput.forEach(equal => {
   equal.addEventListener("click", () => {
     calculateState();
-
-    console.log(state);
   });
 })
 
 function updateParam(value) {
+  ACStatus.textContent = "C";
   // Update params with helper if it has one
   if (state.result) {
     state.second.param = "";
@@ -52,15 +54,13 @@ function updateParam(value) {
     writeToOutput(state.second.param);
   } else {
     if (state.first.param.length > 8) return;
-    if (state.first.param === "0") state.first.param = ""
+    if (state.first.param === "0") state.first.param = "";
     state.first.param += state.first.helper + value;
 
     writeToOutput(state.first.param);
   }
 
   checkValid();
-
-  console.log("UpdateParams", state.first, state.second);
 }
 
 function updateOperator(value) {
@@ -72,7 +72,8 @@ function updateOperator(value) {
 function switchHelpers(value) {
   switch (value.textContent) {
     case "AC":
-      ACCase(value.textContent);
+    case "C":
+      ACCase(value);
       break;
     case "+/-":
       PosNegCase();
@@ -91,16 +92,19 @@ function ACCase(value) {
     state.result = "";
     state.cleanFormula = true;
 
-    // TODO Make AC change to C
-    value.textContent = "AC";
+    ACStatus.textContent = "AC";
   }
 
   if (state.operator) {
     state.second.param = "0";
     writeToOutput(state.second.param);
+
+    ACStatus.textContent = "AC";
   } else {
     state.first.param = "0";
     writeToOutput(state.first.param);
+
+    ACStatus.textContent = "AC";
   }
 }
 
