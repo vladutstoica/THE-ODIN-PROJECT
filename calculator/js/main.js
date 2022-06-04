@@ -4,6 +4,7 @@ const operatorInputs = document.querySelectorAll("[data-operator]");
 const helpersInputs = document.querySelectorAll("[data-helper]");
 const equalInput = document.querySelectorAll("[data-equal]");
 
+let ACStatus;
 let state = {
   first: {
     param: "", helper: "", isValid: false,
@@ -11,8 +12,6 @@ let state = {
     param: "", helper: "", isValid: false,
   }, result: "", cleanFormula: true,
 };
-
-let ACStatus;
 
 numberInputs.forEach(number => {
   number.addEventListener("click", () => {
@@ -49,12 +48,14 @@ function updateParam(value) {
   if (state.operator) {
     if (state.second.param.length > 8) return;
     if (state.second.param === "0") state.second.param = "";
+
     state.second.param += state.second.helper + value;
 
     writeToOutput(state.second.param);
   } else {
     if (state.first.param.length > 8) return;
     if (state.first.param === "0") state.first.param = "";
+
     state.first.param += state.first.helper + value;
 
     writeToOutput(state.first.param);
@@ -64,6 +65,7 @@ function updateParam(value) {
 }
 
 function updateOperator(value) {
+  // Continue to calc after you get the first result
   if (state.result && state.cleanFormula) state.first.param = state.result
 
   state.operator = value;
@@ -73,7 +75,7 @@ function switchHelpers(value) {
   switch (value.textContent) {
     case "AC":
     case "C":
-      ACCase(value);
+      ACCase();
       break;
     case "+/-":
       PosNegCase();
@@ -84,7 +86,7 @@ function switchHelpers(value) {
   }
 }
 
-function ACCase(value) {
+function ACCase() {
   if (state.second.param === "0") {
     state.first.param = "0";
     state.operator = ""
