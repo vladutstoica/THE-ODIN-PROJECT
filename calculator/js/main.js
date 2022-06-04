@@ -245,3 +245,6 @@ function writeToOutput(value) {
     display.textContent = value;
   })
 }
+
+// TODO: Implement checkValid() for cases like e.g. `9999. + .34`
+// TODO: Design improvements for long numbers
