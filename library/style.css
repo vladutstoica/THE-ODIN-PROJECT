@@ -1,0 +1,82 @@
+body {
+    background: #F2EBE3;
+    /*#2C1810*/
+    /*#DAAA63*/
+}
+
+button {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bold;
+
+    border: none;
+
+    cursor: pointer;
+}
+
+#app {
+    font-family: 'Libre Caslon Text', serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-align: center;
+    color: #2c3e50;
+    margin-top: 60px;
+}
+
+.library__books--favorite {
+    font-family: 'Libre Caslon Text', serif;
+}
+
+.library__books-list--favorite {
+    position: relative;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 30px;
+
+    padding: 20px;
+    margin: 0;
+
+    /*overflow-x: auto;*/
+    list-style: none;
+}
+
+.library__books-list--favorite:after {
+    position: absolute;
+    top: 100%;
+    content: "";
+
+    height: 20px;
+    width: 100%;
+
+    background: #DAAA63;
+
+}
+
+.library__books-item--favorite {
+    position: relative;
+}
+
+.library__books-cover--favorite {
+    width: 150px;
+
+    border-radius: 10px;
+
+    box-shadow: 0 0 20px 0 #9F9F9F;
+
+    aspect-ratio: 10/16;
+}
+
+.library__books-badge--favorite {
+    position: absolute;
+    top: 0;
+    right: 0;
+
+    /*width: 100%;*/
+
+    padding: 10px;
+
+    background: #F0E9E0;
+    color: #000;
+
+    border-radius: 0 10px 0 10px;
+}
