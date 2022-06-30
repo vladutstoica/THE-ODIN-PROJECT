@@ -4,6 +4,11 @@ body {
     /*#DAAA63*/
 }
 
+footer {
+    margin-top: 50px;
+    text-align: center;
+}
+
 button {
     font-family: 'Montserrat', sans-serif;
     font-weight: bold;
@@ -19,7 +24,6 @@ button {
     -moz-osx-font-smoothing: grayscale;
     text-align: center;
     color: #2c3e50;
-    /*margin-top: 60px;*/
 }
 
 .button {
@@ -28,7 +32,10 @@ button {
     background: #FFFFFF;
     border-radius: 10px;
 }
-.button--alt {}
+
+.button--alt {
+    background: #F2EBE3;
+}
 
 .library__header {
     display: flex;
@@ -81,35 +88,38 @@ button {
     list-style: none;
 }
 
-.library__books--favorite:after {
+.library__books--favorite__shelf {
     position: absolute;
-    top: calc(100% - 30px);
-    left: 0;
-    content: "";
+    top: 100%;
+    left: 50%;
 
-    height: 20px;
-    width: 110%;
+    width: 100%;
+    height: 40px;
 
-    background: #DAAA63;
+    transform: translate(-50%, -70%);
 
-    z-index: -10;
 }
 
-.library__books-item--favorite {
+.library__books-item--favorite,
+.library__books-item--all {
     position: relative;
 }
 
-.library__books-cover--favorite {
+.library__books-cover--favorite,
+.library__books-cover--all {
     width: 150px;
 
     border-radius: 10px;
 
-    box-shadow: 0 0 20px 0 #9F9F9F;
+    box-shadow: 0 0 20px 0 #2C1810;
 
     aspect-ratio: 10/16;
+
+    cursor: pointer;
 }
 
-.library__books-badge--favorite {
+.library__books-badge--favorite,
+.library__books-badge--all {
     position: absolute;
     top: 0;
     right: 0;
@@ -120,4 +130,93 @@ button {
     color: #000;
 
     border-radius: 0 10px 0 10px;
+}
+
+.library__books--all {
+    padding: 10px 0 30px;
+
+    margin-top: 50px;
+
+    background: #fff;
+
+    border-radius: 10px;
+}
+
+.library__books-list--all {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    flex-wrap: wrap;
+
+    margin: 0;
+    padding: 0;
+
+    list-style: none;
+}
+
+.library__books-cover--all {
+    width: 100px;
+}
+
+.library__books-modal {
+    position: fixed;
+    top: 50%;
+    left: 10px;
+    right: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    padding: 40px 20px 20px;
+
+    max-width: 720px;
+
+    background: #fff;
+
+    border-radius: 10px;
+
+    transform: translateY(-50%);
+
+    box-shadow: 0 0 20px #2C1810;
+}
+
+.library__books-modal__close {
+    position: absolute;
+    top: 0;
+    right: 0;
+
+    padding: 10px;
+
+    border-radius: 0 10px 0 10px;
+
+    cursor: pointer;
+}
+
+.library__books-modal input {
+    padding: 15px 15px 15px 20px;
+
+    background: #f3f2f1;
+
+    border: none;
+    border-radius: 10px;
+}
+
+
+@media screen and (min-width: 720px) {
+    .library__search--input {
+        width: 30%;
+
+        margin-bottom: 50px;
+    }
+
+    .library__books--favorite {
+        display: flex;
+        align-items: center;
+        gap: 50px;
+    }
+
+    .library__books--favorite-title {
+        margin-left: 50px;
+    }
 }
