@@ -1,7 +1,5 @@
 body {
     background: #F2EBE3;
-    /*#2C1810*/
-    /*#DAAA63*/
 }
 
 footer {
@@ -23,7 +21,7 @@ button {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-align: center;
-    color: #2c3e50;
+    color: #2C1810;
 }
 
 .button {
@@ -38,12 +36,22 @@ button {
 }
 
 .library__header {
+    position: sticky;
+    top: 0;
+
     display: flex;
     justify-content: space-between;
     align-items: center;
     gap: 10px;
 
     padding: 10px;
+    margin-bottom: 10px;
+
+    background: #F2EBE3;
+
+    border-bottom: 2px solid #2C1810;
+
+    z-index: 10;
 }
 
 .library__header--logo {
@@ -111,7 +119,7 @@ button {
 
     border-radius: 10px;
 
-    box-shadow: 0 0 20px 0 #2C1810;
+    box-shadow: 5px 5px 20px 0 #F0E9E0;
 
     aspect-ratio: 10/16;
 
@@ -155,8 +163,42 @@ button {
     list-style: none;
 }
 
+.library__books__details {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+
+    max-width: 100px;
+    margin-top: 10px;
+}
+
+.library__books__details__title,
+.library__books__details__author {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.library__books__details__title {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.library__books__details__author {
+    font-size: 12px;
+}
+
 .library__books-cover--all {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
     width: 100px;
+    height: 160px;
+
+    text-transform: uppercase;
+
+    font-size: 56px;
 }
 
 .library__books-modal {
