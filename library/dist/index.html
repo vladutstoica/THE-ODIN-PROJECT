@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <link rel="icon" type="image/svg+xml" href="/dist/assets/favicon.17e50649.svg"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Library</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Text&family=Montserrat:wght@500;600&display=swap" rel="stylesheet">
+  <script type="module" crossorigin src="/dist/assets/index.ac8accb2.js"></script>
+  <link rel="stylesheet" href="/dist/assets/index.cb8e9a2f.css">
+</head>
+<body>
+<div id="app">
+    <div class="library__header">
+        <a class="library__header--logo" href="/">Bookfolio</a>
+
+        <button class="button" onclick="showModal()">Add book</button>
+    </div>
+    
+    <div class="library__search">
+        <input class="library__search--input" type="search" placeholder="Search by title">
+    </div>
+
+    <div class="library__books--favorite">
+        <img class="library__books--favorite__shelf" src="/dist/assets/shelf.baa91ad6.png" alt="Shelf image">
+        <h1 class="library__books--favorite-title">New & Trendings</h1>
+        <ul class="library__books-list--favorite">
+            <li class="library__books-item--favorite">
+                <img class="library__books-cover--favorite" src="/dist/assets/book-cover-1.07a9bde2.png" alt="asd">
+            </li>
+            <li class="library__books-item--favorite">
+                <img class="library__books-cover--favorite" src="/dist/assets/book-cover-2.0e7bb458.png" alt="asd">
+            </li>
+            <li class="library__books-item--favorite">
+                <img class="library__books-cover--favorite" src="/dist/assets/book-cover-3.07372d55.png" alt="asd">
+            </li>
+        </ul>
+    </div>
+
+    <div class="library__books--all">
+        <h2>My books</h2>
+        <ul id="libraryBody" class="library__books-list--all"></ul>
+    </div>
+</div>
+<footer>
+    <span>Inspired by <a href="https://dribbble.com/shots/16246812-Book-Store-Mobile-App">NIKITIN</a></span>
+</footer>
+
+</body>
+</html>
