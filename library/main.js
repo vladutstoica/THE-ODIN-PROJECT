@@ -93,6 +93,7 @@ function showInfoModal(book) {
     titleInput.disabled = true;
     authorInput.disabled = true;
     noOfPagesInput.disabled = true;
+    readInput.disabled = true
 
     closeButton.textContent = "X";
     submitButton.textContent = "Remove book";
