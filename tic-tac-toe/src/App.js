@@ -1,16 +1,22 @@
 import './App.css';
 import Board from "./components/Board";
+import ScoreWrapper from "./components/ScoreWrapper";
+import IntroWrapper from "./components/IntroWrapper";
 
 function App() {
     return (
-        <div>
-            <header className="App-header"></header>
+        <div className={"flex flex-col my-auto gap-8 select-none"}>
+            <header>
+                <IntroWrapper/>
+            </header>
 
             <main>
-                <Board />
+                <Board/>
             </main>
 
-            <footer></footer>
+            <footer>
+                <ScoreWrapper/>
+            </footer>
         </div>
     );
 }

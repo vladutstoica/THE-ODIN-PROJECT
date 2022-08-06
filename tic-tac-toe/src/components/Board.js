@@ -13,5 +13,5 @@ export default function Board() {
             <Square/>
             <Square/>
         </div>
-    )
+    );
 }
