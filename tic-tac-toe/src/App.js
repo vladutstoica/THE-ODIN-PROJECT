@@ -2,6 +2,9 @@ import './App.css';
 import Board from "./components/Board";
 import ScoreWrapper from "./components/ScoreWrapper";
 import IntroWrapper from "./components/IntroWrapper";
+import {Route, Routes} from "react-router-dom";
+import ActionsWrapper from "./components/ActionsWrapper";
+import PickPlayerBoard from "./components/PickPlayerBoard";
 
 function App() {
     return (
@@ -11,11 +14,17 @@ function App() {
             </header>
 
             <main>
-                <Board/>
+                <Routes>
+                    <Route path="/*" element={<PickPlayerBoard/>}/>
+                    <Route path="game/*" element={<Board/>}/>
+                </Routes>
             </main>
 
             <footer>
-                <ScoreWrapper/>
+                <Routes>
+                    <Route path="/*" element={<ActionsWrapper/>}/>
+                    <Route path="game/*" element={<ScoreWrapper/>}/>
+                </Routes>
             </footer>
         </div>
     );
