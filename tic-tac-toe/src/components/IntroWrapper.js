@@ -9,9 +9,7 @@ export default function IntroWrapper() {
         <div className={"max-w-xs mx-auto grid grid-cols-3 gap-3"}>
             <Routes>
                 <Route path="/" element={<Logo/>} />
-                <Route path="game" element={<Logo/>} />
-                <Route path="game" element={<TurnInfo/>} />
-                <Route path="game" element={<RestartButton/>} />
+                <Route path="game" element={<><Logo/><TurnInfo/><RestartButton/></>} />
             </Routes>
         </div>
     );

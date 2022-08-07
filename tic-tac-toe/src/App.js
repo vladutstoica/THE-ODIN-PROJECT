@@ -15,14 +15,14 @@ function App() {
 
             <main>
                 <Routes>
-                    <Route path="/*" element={<PickPlayerBoard/>}/>
+                    <Route path="/" element={<PickPlayerBoard/>}/>
                     <Route path="game/*" element={<Board/>}/>
                 </Routes>
             </main>
 
             <footer>
                 <Routes>
-                    <Route path="/*" element={<ActionsWrapper/>}/>
+                    <Route path="/" element={<ActionsWrapper/>}/>
                     <Route path="game/*" element={<ScoreWrapper/>}/>
                 </Routes>
             </footer>
