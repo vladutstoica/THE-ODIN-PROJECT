@@ -1,5 +1,7 @@
 import Square from "./Square";
 import {useState} from "react";
+import WinStateModal from "./WinStateModal";
+import {ModalContext} from "./Context";
 
 function checkWinner(gameStatus) {
     const lines = [
@@ -26,6 +28,7 @@ function checkWinner(gameStatus) {
 
 export default function Board() {
     const [squares, setSquares] = useState({array: Array(9).fill(null), xIsNext: true});
+    const [showModal, setShowModal] = useState(false);
 
     function handleClick(index) {
         if (checkWinner(squares.array) || squares.array[index]) return;
@@ -33,13 +36,21 @@ export default function Board() {
         squares.array[index] = squares.xIsNext ? "X" : "O";
 
         setSquares({array: squares.array, xIsNext: !squares.xIsNext});
+
+        if (checkWinner(squares.array)) {
+            setShowModal(true);
+        }
     }
 
     return (
-        <div className={"max-w-xs mx-auto grid grid-cols-3 gap-3 gap-y-5"}>
-            {squares.array.map((item, index) => {
-                return <Square key={index} value={item} onClick={() => handleClick(index)}/>
-            })}
-        </div>
+        <ModalContext.Provider value={{showModal, setShowModal}}>
+            <div className={"max-w-xs mx-auto grid grid-cols-3 gap-3 gap-y-5"}>
+                {squares.array.map((item, index) => {
+                    return <Square key={index} value={item} onClick={() => handleClick(index)}/>
+                })}
+
+                <WinStateModal winner={!squares.xIsNext}/>
+            </div>
+        </ModalContext.Provider>
     );
 }
