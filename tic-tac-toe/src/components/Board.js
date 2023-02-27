@@ -37,9 +37,9 @@ export default function Board() {
 
         setSquares({array: squares.array, xIsNext: !squares.xIsNext});
 
-        if (checkWinner(squares.array)) {
-            setShowModal(true);
-        }
+        if (checkWinner(squares.array)) setShowModal(true);
+
+        if (!squares.array.includes(null) && !checkWinner(squares.array)) setShowModal(true);
     }
 
     return (
@@ -49,7 +49,7 @@ export default function Board() {
                     return <Square key={index} value={item} onClick={() => handleClick(index)}/>
                 })}
 
-                <WinStateModal winner={!squares.xIsNext}/>
+                <WinStateModal winner={!squares.array.includes(null) ? null : !squares.xIsNext}/>
             </div>
         </ModalContext.Provider>
     );

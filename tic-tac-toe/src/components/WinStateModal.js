@@ -5,7 +5,6 @@ import {ModalContext} from "./Context";
 
 export default function WinStateModal({winner}) {
     const {showModal, setShowModal} = useContext(ModalContext);
-    console.log(showModal);
 
     return (
         <>
@@ -14,8 +13,8 @@ export default function WinStateModal({winner}) {
 
             <div
                 className={`absolute flex flex-col items-center gap-5 p-10 left-0 right-0 bg-custom-button ${showModal ? "" : "hidden"}`}>
-                <span className={"text-custom-3 font-black"}>YOU WON!</span>
-                <span className={"flex items-center gap-5 text-custom-2 text-4xl font-black"}>{winner ? <X/> : <O/>}TAKES THE ROUND</span>
+                <span className={"text-custom-3 font-black"}>{winner === null ? "" : "YOU WON!"}</span>
+                <span className={"flex items-center gap-5 text-custom-2 text-4xl font-black"}>{winner === null ? "DRAW" : winner ? <X/> : <O/>} {winner != null && "TAKES THE ROUND"}</span>
 
                 <div className={"flex gap-5"}>
                     <button
